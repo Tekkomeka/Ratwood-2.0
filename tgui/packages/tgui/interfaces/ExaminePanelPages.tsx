@@ -78,7 +78,11 @@ export const FlavorTextPage = (props) => {
                     >
                       {oocNotesIndex === 'SFW' && (
                     <Box
-                    dangerouslySetInnerHTML={oocHTML}
+                    dangerouslySetInnerHTML={{
+                      __html: ooc_notes
+                        ? `<span class='Chat'>${ooc_notes}</span>`
+                        : "<i>No OOC notes provided.</i>",
+                      }}
                     />
                     )}
                       {oocNotesIndex === 'NSFW' && (
@@ -123,7 +127,11 @@ export const FlavorTextPage = (props) => {
             >                  
               {flavorTextIndex === 'SFW' && (
                 <Box
-                dangerouslySetInnerHTML={flavorHTML}
+              dangerouslySetInnerHTML={{
+                __html: flavor_text
+                  ? `<span class='Chat'>${flavor_text}</span>`
+                  : "<i>No flavor text provided.</i>",
+              }}
                 />
               )}
               {flavorTextIndex === 'NSFW' && (

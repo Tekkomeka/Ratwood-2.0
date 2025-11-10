@@ -156,11 +156,11 @@
 			if(is_druid)
 				rank_name = "a druid"
 			if(social_rank > examiner_rank)
-				. += span_notice("This person is <EM>[rank_name]</EM>, they are my better.")
+				. += span_notice("This persons social standing is equivalent to <EM>[rank_name]</EM>, they are my better.")
 			if(social_rank == examiner_rank)
-				. += span_notice("This person is <EM>[rank_name]</EM>, they are my equal.")
+				. += span_notice("This person social standing is equivalent to <EM>[rank_name]</EM>, they are my equal.")
 			if(social_rank < examiner_rank)
-				. += span_notice("This person is <EM>[rank_name]</EM>, they are my lesser.")
+				. += span_notice("This person social standing is equivalent to <EM>[rank_name]</EM>, they are my lesser.")
 
 		// Leashed pet status effect message
 		if(has_status_effect(/datum/status_effect/leash_pet))

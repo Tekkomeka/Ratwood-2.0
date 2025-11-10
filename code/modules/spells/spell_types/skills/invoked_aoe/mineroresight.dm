@@ -6,7 +6,7 @@
 	releasedrain = 10
 	chargedrain = 0
 	chargetime = 0
-	range = 7
+	range = 1
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/diagnose.ogg'
@@ -19,7 +19,8 @@
 
 /obj/effect/proc_holder/spell/invoked/mineroresight/cast(list/targets, mob/living/user)
 	//show the miners what rock turfs are valuable
-	for(var/turf/closed/mineral/rockturfs in view(7,get_turf(user)))
+	var/checkrange = (range + user.get_skill_level(/datum/skill/labor/mining)) //+1 range per mining skill up to a potential of 7.
+	for(var/turf/closed/mineral/rockturfs in view(checkrange,get_turf(user)))
 		if(istype(rockturfs, /turf/closed/mineral/random/rogue/med) || istype(rockturfs, /turf/closed/mineral/rogue/copper) || istype(rockturfs, /turf/closed/mineral/rogue/tin) || istype(rockturfs, /turf/closed/mineral/rogue/coal))
 			found_ore(get_turf(rockturfs), user.client, "shieldsparkles")
 			//to_chat(user, span_warning("I see some medium quality stone"))
@@ -33,7 +34,7 @@
 			found_ore(get_turf(rockturfs), user.client, "purplesparkles")
 			//to_chat(user, span_warning("I see stone too hard to hit"))
 
-	//show the miners what boulders are valuable 
+	//show the miners what boulders are valuable
 	for(var/obj/item/natural/rock/boulderobjs in view(7,get_turf(user)))
 		if(istype(boulderobjs, /obj/item/natural/rock/copper) || istype(boulderobjs, /obj/item/natural/rock/tin) || istype(boulderobjs, /obj/item/natural/rock/coal))
 			found_ore(get_turf(boulderobjs), user.client, "shieldsparkles")

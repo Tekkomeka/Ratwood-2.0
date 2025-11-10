@@ -78,6 +78,7 @@ SUBSYSTEM_DEF(nightshift)
 	return
 
 /mob/living/carbon/human/update_tod(todd)
+	progress_cycles()
 	if(client)
 		var/area/areal = get_area(src)
 		if(!cmode)
