@@ -8,10 +8,10 @@
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	subclass_stats = list(
+		STATKEY_SPD = -1,
 		STATKEY_STR = 1,
 		STATKEY_CON = 1,
 		STATKEY_INT = 2,
-		STATKEY_SPD = -1,
 	)
 
 
@@ -22,27 +22,9 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-
+		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/tracking = SKILL_LEVEL_NOVICE,
-
-		/datum/skill/misc/sneaking = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/carpentry = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/masonry = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/engineering = SKILL_LEVEL_NOVICE,
-
-		/datum/skill/craft/traps = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
-
-		/datum/skill/labor/farming = SKILL_LEVEL_NOVICE,
-		/datum/skill/labor/lumberjacking = SKILL_LEVEL_NOVICE,
-		/datum/skill/labor/fishing = SKILL_LEVEL_NOVICE,
-		/datum/skill/labor/butchering = SKILL_LEVEL_NOVICE
+		/datum/skill/misc/sneaking = SKILL_LEVEL_NOVICE,  //They don't get massive skilll list anymore aside of journeyman in crafting.
 	)
 
 /datum/outfit/job/roguetown/homesteader/pre_equip(mob/living/carbon/human/H)
@@ -50,12 +32,22 @@
 	// Homesteader cosmetic title selection
 	H.adjust_blindness(-3)
 	var/cosmetic_titles = list(
+	"Artisan", "Artisana",
+	"Craftsman", "Craftswoman",
 	"Devotee", "Devotess",
-	"Fieldworker", "Fieldwoman", "Handiworker", "Handiwoman",
-	"Hedgefolk", "Herbalist", "Homesteader", "Homesteadress",
+	"Fieldworker",
+	"Forager",
+	"Handiworker",
+	"Hedgefolk",
+	"Herbalist",
+	"Homesteader", "Homesteadress",
 	"Householder", "Househusband", "Housewife",
-	"Laborer", "Laboress",
-	"Villager", "Villagewoman")
+	"Laborer",
+	"Pioneer",
+	"Settler",
+	"Tradesperson",
+	"Villager",
+	"Woodsman", "Woodswoman")
 	var/cosmetic_choice = input(H, "Select your cosmetic title!", "Cosmetic Titles") as anything in cosmetic_titles
 
 	switch(cosmetic_choice)
@@ -110,6 +102,46 @@
 		if("Villagewoman")
 			to_chat(H, span_notice("You are a Villagewoman, common folk of the settlement."))
 			H.mind.cosmetic_class_title = "Villagewoman"
+		if("Artisan")
+			to_chat(H, span_notice("You are an Artisan, skilled in your craft and trade."))
+			H.mind.cosmetic_class_title = "Artisan"
+		if("Artisana")
+			to_chat(H, span_notice("You are an Artisana, skilled in your craft and trade."))
+			H.mind.cosmetic_class_title = "Artisana"
+		if("Pioneer")
+			to_chat(H, span_notice("You are a Pioneer, a brave settler of new lands."))
+			H.mind.cosmetic_class_title = "Pioneer"
+		if("Pioneress")
+			to_chat(H, span_notice("You are a Pioneress, a brave settler of new lands."))
+			H.mind.cosmetic_class_title = "Pioneress"
+		if("Settler")
+			to_chat(H, span_notice("You are a Settler, one who makes a home in strange lands."))
+			H.mind.cosmetic_class_title = "Settler"
+		if("Settleress")
+			to_chat(H, span_notice("You are a Settleress, one who makes a home in strange lands."))
+			H.mind.cosmetic_class_title = "Settleress"
+		if("Tradesperson")
+			to_chat(H, span_notice("You are a Tradesperson, skilled in commerce and craft."))
+			H.mind.cosmetic_class_title = "Tradesperson"
+		if("Tradewoman")
+			to_chat(H, span_notice("You are a Tradewoman, skilled in commerce and craft."))
+			H.mind.cosmetic_class_title = "Tradewoman"
+		if("Woodsman")
+			to_chat(H, span_notice("You are a Woodsman, at home in forest and timber."))
+			H.mind.cosmetic_class_title = "Woodsman"
+		if("Woodswoman")
+			to_chat(H, span_notice("You are a Woodswoman, at home in forest and timber."))
+			H.mind.cosmetic_class_title = "Woodswoman"
+		if("Craftsman")
+			to_chat(H, span_notice("You are a Craftsman, skilled in your trade."))
+			H.mind.cosmetic_class_title = "Craftsman"
+		if("Craftswoman")
+			to_chat(H, span_notice("You are a Craftswoman, skilled in your trade."))
+			H.mind.cosmetic_class_title = "Craftswoman"
+		if("Forager")
+			to_chat(H, span_notice("You are a Forager, gathering from the wilds."))
+			H.mind.cosmetic_class_title = "Forager"
+
 
 	// STAT PACK SELECTION
 	var/stat_packs = list("Agile", "Bookworm", "Toned", "All-Rounded")
@@ -135,7 +167,7 @@
 			H.change_stat(STATKEY_CON, 1)
 			H.change_stat(STATKEY_WIL, 1)
 			H.change_stat(STATKEY_INT, -1)
-			H.change_stat(STATKEY_SPD, -2)
+			H.change_stat(STATKEY_SPD, -1)
 		if("All-Rounded")
 			to_chat(H, span_notice("You are balanced in all aspects."))
 			// No stat changes for all-rounded
@@ -151,9 +183,8 @@
 			if(H.mind)
 				H.mind.special_items["Hammer"] = /obj/item/rogueweapon/hammer/steel
 				H.mind.special_items["Sheathe"] = /obj/item/rogueweapon/scabbard/sheath
-				H.mind.special_items["Hunting Knife"] = /obj/item/rogueweapon/huntingknife
-				H.mind.special_items["Woodcutter's Axe"] = /obj/item/rogueweapon/stoneaxe/woodcut/steel/woodcutter
-				H.mind.special_items["[pick("Good", "Bad", "Normal")] Day's Wine"] = /obj/item/reagent_containers/glass/bottle/rogue/wine
+				H.mind.special_items["Bronze Knife"] = /obj/item/rogueweapon/huntingknife/bronze
+				H.mind.special_items["Bronze Axe"] = /obj/item/rogueweapon/stoneaxe/woodcut/bronze
 				H.mind.special_items["Barber's Innocuous Bag"] = /obj/item/storage/belt/rogue/surgery_bag/full
 				H.mind.special_items["Trusty Pick"] = /obj/item/rogueweapon/pick
 				H.mind.special_items["Hoe"] = /obj/item/rogueweapon/hoe
@@ -162,33 +193,22 @@
 				H.mind.special_items["Pan for Frying"] = /obj/item/cooking/pan
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 
-			// Thematic traits for Homesteading
-			ADD_TRAIT(H, TRAIT_HOMESTEAD_EXPERT, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_OUTDOORSMAN, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_ALCHEMY_EXPERT, TRAIT_GENERIC)
-
 
 		if("Charlatan")
 			to_chat(H, span_notice("You are a smooth-talking charlatan, versed in deception and clever words."))
 
 			if(H.mind)
 				H.mind.special_items["Sheathe"] = /obj/item/rogueweapon/scabbard/sheath
-				H.mind.special_items["Dagger"] = /obj/item/rogueweapon/huntingknife
+				H.mind.special_items["Bronze Dagger"] = /obj/item/rogueweapon/huntingknife/bronze
 				H.mind.special_items["Lockpick Ring"] = /obj/item/lockpickring/mundane
 				H.mind.special_items["[pick("Good", "Bad", "Normal")] Day's Wine"] = /obj/item/reagent_containers/glass/bottle/rogue/wine
-				H.mind.special_items["Coin Purse"] = /obj/item/storage/belt/rogue/pouch/coins
+				H.mind.special_items["Coin Purse"] = /obj/item/storage/belt/rogue/pouch/coins/poor
 
 			
 			// Boost sneaking, stealing, and lockpicking
 			H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/stealing, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, SKILL_LEVEL_JOURNEYMAN, TRUE)
-			// Thematic traits for Charlatan
-			ADD_TRAIT(H, TRAIT_SEEPRICES_SHITTY, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_CICERONE, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_KEENEARS, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_SURVIVAL_EXPERT, TRAIT_GENERIC)
 
 // Still random clothing... meh. Get your loadout ones.
 	head = pick(/obj/item/clothing/head/roguetown/hatfur,
@@ -226,23 +246,15 @@
 //Debloats their contents
 	backpack_contents = list(
 						/obj/item/flint = 1,
-						/obj/item/flashlight/flare/torch = 1,
 						/obj/item/rogueweapon/handsaw = 1,
 						/obj/item/dye_brush = 1,
-						/obj/item/recipe_book/builder = 1,
-						/obj/item/recipe_book/survival = 1,
 						/obj/item/reagent_containers/powder/salt = 1,
 						/obj/item/reagent_containers/food/snacks/rogue/cheddar = 2,
 						/obj/item/natural/cloth = 2,
 //						/obj/item/book/rogue/yeoldecookingmanual = 1,
 //						/obj/item/natural/worms = 2,
 						/obj/item/rogueweapon/shovel/small = 1,
-						/obj/item/hair_dye_cream = 1,
 						/obj/item/rogueweapon/chisel = 1,
-						/obj/item/natural/clay = 1,
-						/obj/item/natural/clay/glassbatch = 1,
-						/obj/item/rogueore/coal = 1,
-						/obj/item/roguegear = 1,
 	)
 
 	if(H.mind)
@@ -261,7 +273,8 @@
 			"Farming" = /datum/skill/labor/farming,
 			"Lumberjacking" = /datum/skill/labor/lumberjacking,
 			"Fishing" = /datum/skill/labor/fishing,
-			"Butchering" = /datum/skill/labor/butchering
+			"Butchering" = /datum/skill/labor/butchering,
+			"Mining" = /datum/skill/labor/mining
 		)
 		var/craft_skills = list(
 			"Sewing" = /datum/skill/craft/sewing,
@@ -276,7 +289,8 @@
 			"Cooking" = /datum/skill/craft/cooking,
 			"Weaponsmithing" = /datum/skill/craft/weaponsmithing,
 			"Armorsmithing" = /datum/skill/craft/armorsmithing,
-			"Blacksmithing" = /datum/skill/craft/blacksmithing
+			"Blacksmithing" = /datum/skill/craft/blacksmithing,
+			"Smelting" = /datum/skill/craft/smelting
 		)
 		var/combat_skills = list(
 			"Axes" = /datum/skill/combat/axes,
@@ -290,23 +304,108 @@
 			"Polearms" = /datum/skill/combat/polearms,
 			"Shields" = /datum/skill/combat/shields,
 			"Slings" = /datum/skill/combat/slings,
-			"Swords" = /datum/skill/combat/swords
+			"Swords" = /datum/skill/combat/swords,
+			"Maces" = /datum/skill/combat/maces
 		)
 
 		// Select one skill to EXPERT
 		var/expert_skill_name = input(H, "Choose one skill to EXPERT.", "Skill Selection") as anything in misc_skills + labor_skills + craft_skills
-		H.adjust_skillrank_up_to(misc_skills[expert_skill_name] || labor_skills[expert_skill_name] || craft_skills[expert_skill_name], SKILL_LEVEL_EXPERT, TRUE)
+		if(expert_skill_name)
+			H.adjust_skillrank_up_to(misc_skills[expert_skill_name] || labor_skills[expert_skill_name] || craft_skills[expert_skill_name], SKILL_LEVEL_EXPERT, TRUE)
+			if(expert_skill_name in misc_skills)
+				misc_skills -= expert_skill_name
+			if(expert_skill_name in labor_skills)
+				labor_skills -= expert_skill_name
+			if(expert_skill_name in craft_skills)
+				craft_skills -= expert_skill_name 
 
 		// Select one COMBAT skill to JOURNEYMAN
 		var/journeyman_combat_name = input(H, "Choose a COMBAT skill to JOURNEYMAN.", "Skill Selection") as anything in combat_skills
-		H.adjust_skillrank_up_to(combat_skills[journeyman_combat_name], SKILL_LEVEL_JOURNEYMAN, TRUE)
+		if(journeyman_combat_name)
+			H.adjust_skillrank_up_to(combat_skills[journeyman_combat_name], SKILL_LEVEL_JOURNEYMAN, TRUE)
+			if(journeyman_combat_name in combat_skills)
+				combat_skills -= journeyman_combat_name
 
 		// Select two MISC/LABOR/CRAFT skills to JOURNEYMAN
 		for(var/i in 1 to 2)
 			var/journeyman_name = input(H, "Choose a MISC/LABOR/CRAFT skill to JOURNEYMAN.", "Skill Selection") as anything in misc_skills + labor_skills + craft_skills
-			H.adjust_skillrank_up_to(misc_skills[journeyman_name] || labor_skills[journeyman_name] || craft_skills[journeyman_name], SKILL_LEVEL_JOURNEYMAN, TRUE)
+			if(journeyman_name)
+				H.adjust_skillrank_up_to(misc_skills[journeyman_name] || labor_skills[journeyman_name] || craft_skills[journeyman_name], SKILL_LEVEL_JOURNEYMAN, TRUE)
+				if(journeyman_name in misc_skills)
+					misc_skills -= journeyman_name
+				if(journeyman_name in labor_skills)
+					labor_skills -= journeyman_name
+				if(journeyman_name in craft_skills)
+					craft_skills -= journeyman_name
 
 		// Select three skills to APPRENTICE
 		for(var/i in 1 to 3)
 			var/apprentice_name = input(H, "Choose a skill to APPRENTICE.", "Skill Selection") as anything in misc_skills + labor_skills + craft_skills + combat_skills
-			H.adjust_skillrank_up_to(misc_skills[apprentice_name] || labor_skills[apprentice_name] || craft_skills[apprentice_name] || combat_skills[apprentice_name], SKILL_LEVEL_APPRENTICE, TRUE)
+			if(apprentice_name)
+				H.adjust_skillrank_up_to(misc_skills[apprentice_name] || labor_skills[apprentice_name] || craft_skills[apprentice_name] || combat_skills[apprentice_name], SKILL_LEVEL_APPRENTICE, TRUE)
+				if(apprentice_name in misc_skills)
+					misc_skills -= apprentice_name
+				if(apprentice_name in labor_skills)
+					labor_skills -= apprentice_name
+				if(apprentice_name in craft_skills)
+					craft_skills -= apprentice_name
+				if(apprentice_name in combat_skills)
+					combat_skills -= apprentice_name
+
+		// Select four skills to NOVICE
+		for(var/i in 1 to 4)
+			var/novice_name = input(H, "Choose a skill to NOVICE.", "Skill Selection") as anything in misc_skills + labor_skills + craft_skills + combat_skills
+			if(novice_name)
+				H.adjust_skillrank_up_to(misc_skills[novice_name] || labor_skills[novice_name] || craft_skills[novice_name] || combat_skills[novice_name], SKILL_LEVEL_NOVICE, TRUE)
+				if(novice_name in misc_skills)
+					misc_skills -= novice_name
+				if(novice_name in labor_skills)
+					labor_skills -= novice_name
+				if(novice_name in craft_skills)
+					craft_skills -= novice_name
+				if(novice_name in combat_skills)
+					combat_skills -= novice_name
+
+		// TRAIT SELECTION
+		// Skill-unlocking traits
+		var/skill_unlock_traits = list(
+			"Homestead Expert" = TRAIT_HOMESTEAD_EXPERT,
+			"Alchemy Expert" = TRAIT_ALCHEMY_EXPERT,
+			"Survival Expert" = TRAIT_SURVIVAL_EXPERT
+		)
+		
+		// Non-skill-locking traits
+		var/regular_traits = list( //Actual survival suff
+			"Outdoorsman" = TRAIT_OUTDOORSMAN,
+			"Woodwalker" = TRAIT_WOODWALKER,
+			"Sleuth" = TRAIT_SLEUTH,
+			"Native Of the Land" = TRAIT_AZURENATIVE,
+			"Light Step" = TRAIT_LIGHT_STEP,
+			"Perfect Tracker" = TRAIT_PERFECT_TRACKER,
+
+			"Dyes Master" = TRAIT_DYES, // More RP centric stuff
+			"Intellectual" = TRAIT_INTELLECTUAL,
+			"Good Lover" = TRAIT_GOODLOVER,
+			"Empath" = TRAIT_EMPATH,
+			"See Prices (Shitty)" = TRAIT_SEEPRICES_SHITTY,
+			"Beautiful" = TRAIT_BEAUTIFUL,
+			"Cicerone" = TRAIT_CICERONE,
+			"Keen Ears" = TRAIT_KEENEARS
+		)
+
+		// Select one skill-unlocking trait
+		var/skill_trait_name = input(H, "Choose one skill-unlocking trait.", "Trait Selection") as anything in skill_unlock_traits
+		if(skill_trait_name)
+			ADD_TRAIT(H, skill_unlock_traits[skill_trait_name], TRAIT_GENERIC)
+			if(skill_trait_name in skill_unlock_traits)
+				skill_unlock_traits -= skill_trait_name
+
+		// Select three regular traits
+		for(var/i in 1 to 3)
+			var/regular_trait_name = input(H, "Choose a trait [i]/3.", "Trait Selection") as anything in regular_traits
+			if(regular_trait_name)
+				ADD_TRAIT(H, regular_traits[regular_trait_name], TRAIT_GENERIC)
+				if(regular_trait_name in regular_traits)
+					regular_traits -= regular_trait_name
+
+// Still random clothing... meh. Get your loadout ones.
