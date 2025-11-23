@@ -2027,7 +2027,7 @@
 	usr.next_click = world.time + 1
 	if(!ismob(usr))
 		return
-	// If the fill color is the devotion-blue, trigger the human cleric prayer verb.
+	// If the fill color is the devotion-blue, trigger the cleric prayer verb.
 	var/col = fill.color
 	if(col == "#3C41A4" || col == "#3c41a4")
 		if(istype(usr, /mob/living/carbon/human))
