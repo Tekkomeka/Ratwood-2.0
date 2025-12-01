@@ -2133,19 +2133,12 @@
 
 //Elven weapons added by Jam
 /obj/item/rogueweapon/sword/short/elf
-	name = "elven sword"
-	desc = "This flowing sword is of elven design."
+	name = "elven shortsword"
+	desc = "This flowing sword is of classic elven design."
 	icon_state = "elfsword"
 
 /obj/item/rogueweapon/sword/long/elf
-	name = "elven sword"
-	desc = "This mighty flowing sword is of elven design."
+	name = "elven longsword"
+	desc = "This mighty flowing sword is of classic elven design."
 	icon = 'icons/roguetown/weapons/64.dmi'
 	icon_state = "elflongsword"
-
-	
-/obj/item/rogueweapon/sword/long/kriegmesser/elf
-	name = "elven curveblade"
-	desc = "This flowing sword is of elven design."
-	icon = 'icons/roguetown/weapons/64.dmi'
-	icon_state = "elfcurveblade"

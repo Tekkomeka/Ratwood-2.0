@@ -1610,33 +1610,21 @@
 
 
 //Elven weapons added by Jam
-/obj/item/rogueweapon/sword/sabre/elf2
-	name = "elven sword"
-	desc = "This flowing sword is of elven design."
-	icon_state = "elfsword"
-/obj/item/rogueweapon/greatsword/elf
-	name = "claymore"
-	desc = "This is much longer than a common greatsword, and well balanced too!"
-	icon_state = "claymore"
-	smeltresult = /obj/item/ingot/iron
-	smelt_bar_num = 3
-	max_blade_int = 220
-	wdefense = 4
-	force = 14
-	force_wielded = 35
 
 /obj/item/rogueweapon/greatsword/elf
-	name = "claymore"
-	desc = "This is much longer than a common greatsword, and well balanced too!"
-	icon_state = "claymore"
-	smeltresult = /obj/item/ingot/iron
-	smelt_bar_num = 3
-	max_blade_int = 220
-	wdefense = 4
-	force = 14
-	force_wielded = 35
+	possible_item_intents = list(/datum/intent/sword/chop,/datum/intent/sword/strike) //bash is for nonlethal takedowns, only targets limbs
+	// Design Intent: It is pretty purely a two-handed weapon. In one hand it's a bit clumsy.
+	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/rend, /datum/intent/sword/thrust/zwei, /datum/intent/sword/strike/bad)
+	//can't be alt-gripped. Ought to compensate for that.
+	name = "elven curveblade"
+	desc = "The Elven Curveblade is a traditional weapon, its practice as much a dance as a method of death. Flowing like the water's current, let its path lead to your enemy's throat."
+	icon_state = "elfcurveblade"
+	wlength = WLENGTH_LONG//less reach than greatsword!
+	minstr = 7//lighter
+	wdefense = 8//better defence than greatsword
+
 
 /obj/item/rogueweapon/spear/naginata/elf
-	name = "Elven Glaive"
-	desc = "An elven weapon that combines the elegant, curved slicing blade with a lengthy handle."
+	name = "elven swordspear"
+	desc = "An elven weapon that combines the elegant sweeping blade typical of elven design with a lengthy handle. The true guardian of the forest realm."
 	icon_state = "elfglaive"
