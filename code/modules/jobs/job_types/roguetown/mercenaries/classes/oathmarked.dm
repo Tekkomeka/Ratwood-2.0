@@ -34,6 +34,7 @@
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
@@ -70,6 +71,7 @@
 		/obj/item/book/rogue/secret/oathmarked = 1,
 		)
 	H.merctype = 16
+	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
 /datum/advclass/mercenary/oathmarked/executor
 	name = "Oathmarked Executor"
@@ -85,6 +87,7 @@
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
