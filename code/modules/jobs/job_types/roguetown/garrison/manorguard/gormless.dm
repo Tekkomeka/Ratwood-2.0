@@ -10,7 +10,7 @@
 
 	category_tags = list(CTAG_MENATARMS)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(//This is more like +4/+2/+3/-2/-2
+	subclass_stats = list(//This is more like +4/+2/+3/-2/-1
 		STATKEY_CON = 3,//+1 from guard bonus, so +4 in town.
 		STATKEY_STR = 2,
 		STATKEY_WIL = 2,//+1 from guard bonus, so +3 in town.
