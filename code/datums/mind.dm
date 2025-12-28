@@ -975,7 +975,11 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 							I.smeltresult = /obj/item/ash
 							
 							// Remove crit protection if the item has it
-							if(istype(I, /obj/item/clothing))
+							// Only apply armor modifications to actual armor items
+							if(istype(I, /obj/item/clothing/suit/roguetown/armor) || \
+								istype(I, /obj/item/clothing/head/roguetown/helmet) || \
+								istype(I, /obj/item/clothing/gloves/roguetown) || \
+								istype(I, /obj/item/clothing/shoes/roguetown/boots))
 								var/obj/item/clothing/C = I
 								C.prevent_crits = null
 								// Set armor class to LIGHT for all loadout armor
