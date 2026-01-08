@@ -103,19 +103,22 @@
 			if(!user.pulledby)
 				if(!user.has_status_effect(/datum/status_effect/debuff/harpy_flight))
 					if(user.mobility_flags & MOBILITY_STAND)
-						if(HAS_TRAIT(user, TRAIT_INFINITE_STAMINA))
-							to_chat(user, span_bloody("I am too energetic to control my flight!</br>AGHH!!"))
-							user.Knockdown(10)
+						if(!user.restrained(ignore_grab = FALSE))
+							if(HAS_TRAIT(user, TRAIT_INFINITE_STAMINA))
+								to_chat(user, span_bloody("I am too energetic to control my flight!</br>AGHH!!"))
+								user.Knockdown(10)
+							else
+								user.visible_message(span_notice("[user] prepares to take flight."))
+								if(do_after(user, 3 SECONDS))
+									var/athletics_skill = max(user.get_skill_level(/datum/skill/misc/athletics), SKILL_LEVEL_NOVICE)
+									var/stamina_cost_final = round((baseline_stamina_cost - athletics_skill), 1)
+									user.apply_status_effect(/datum/status_effect/debuff/harpy_flight, stamina_cost_final)
+									playsound(user, pick(swoop_sound), 100)
+									user.emote("wingsfly", forced = TRUE)
+									if(prob(1)) // somebody, call saint jiub!!
+										playsound(user, 'sound/foley/footsteps/flight_sounds/cliffracer.ogg', 100)
 						else
-							user.visible_message(span_notice("[user] prepares to take flight."))
-							if(do_after(user, 3 SECONDS))
-								var/athletics_skill = max(user.get_skill_level(/datum/skill/misc/athletics), SKILL_LEVEL_NOVICE)
-								var/stamina_cost_final = round((baseline_stamina_cost - athletics_skill), 1)
-								user.apply_status_effect(/datum/status_effect/debuff/harpy_flight, stamina_cost_final)
-								playsound(user, pick(swoop_sound), 100)
-								user.emote("wingsfly", forced = TRUE)
-								if(prob(1)) // somebody, call saint jiub!!
-									playsound(user, 'sound/foley/footsteps/flight_sounds/cliffracer.ogg', 100)
+							to_chat(user, span_bloody("The chains are restrcting my freedom!!"))
 					else
 						to_chat(user, span_bloody("I can't fly while imbalanced like this! AGHH!!"))
 				else
