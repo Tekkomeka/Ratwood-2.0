@@ -20,6 +20,20 @@
 		return D.type
 	return null
 
+// Convert a string path to an actual type path, returns null if invalid
+// This is needed for JSON-decoded presets where type paths become strings
+/proc/string_to_typepath(value)
+	if(isnull(value))
+		return null
+	if(ispath(value))
+		return value
+	if(istext(value))
+		// Try to convert string to type path
+		var/path = text2path(value)
+		if(ispath(path))
+			return path
+	return null
+
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
 	This proc checks if the current directory of the savefile S needs updating
@@ -453,10 +467,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["vice4"] >> vice4_type
 	S["vice5"] >> vice5_type
 	
-	// Vice1 is required - pick a random one if invalid
+	// Vice1 is required - use charflaw as fallback for old characters, only randomize if both are missing
 	if(vice1_type && ispath(vice1_type))
 		vice1 = new vice1_type()
+	else if(charflaw_type && ispath(charflaw_type))
+		// Old character without vice1 saved - use their charflaw
+		vice1 = new charflaw_type()
 	else
+		// Truly new/corrupted save - pick random
 		var/random_vice = pick(GLOB.character_flaws)
 		var/random_vice_path = GLOB.character_flaws[random_vice]
 		vice1 = new random_vice_path()

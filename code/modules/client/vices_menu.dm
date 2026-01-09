@@ -460,183 +460,111 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 	save_to_history()
 	
 	// Restore all values from preset with validation
-	var/statpack_type = preset["statpack"]
-	if(statpack_type)
-		// Handle both old format (datum instance) and new format (type path)
-		if(ispath(statpack_type, /datum/statpack))
-			statpack = new statpack_type()
-		else if(istype(statpack_type, /datum/statpack))
-			var/datum/statpack/old_datum = statpack_type
-			if(old_datum.type)
-				statpack = new old_datum.type
-			else
-				statpack = new /datum/statpack/wildcard/fated()
-		else
-			statpack = new /datum/statpack/wildcard/fated()
+	// Use string_to_typepath() to handle both type paths and JSON-decoded strings
+	var/statpack_type = string_to_typepath(preset["statpack"])
+	if(statpack_type && ispath(statpack_type, /datum/statpack))
+		statpack = new statpack_type()
 	else
 		statpack = new /datum/statpack/wildcard/fated()
 	
-	var/virtue_type = preset["virtue"]
-	if(virtue_type)
-		if(ispath(virtue_type, /datum/virtue))
-			virtue = new virtue_type()
-		else if(istype(virtue_type, /datum/virtue))
-			var/datum/virtue/old_datum = virtue_type
-			if(old_datum.type)
-				virtue = new old_datum.type
-			else
-				virtue = new /datum/virtue/none()
-		else
-			virtue = new /datum/virtue/none()
+	var/virtue_type = string_to_typepath(preset["virtue"])
+	if(virtue_type && ispath(virtue_type, /datum/virtue))
+		virtue = new virtue_type()
 	else
 		virtue = new /datum/virtue/none()
 	
-	var/virtuetwo_type = preset["virtuetwo"]
-	if(virtuetwo_type)
-		if(ispath(virtuetwo_type, /datum/virtue))
-			virtuetwo = new virtuetwo_type()
-		else if(istype(virtuetwo_type, /datum/virtue))
-			var/datum/virtue/old_datum = virtuetwo_type
-			if(old_datum.type)
-				virtuetwo = new old_datum.type
-			else
-				virtuetwo = new /datum/virtue/none()
-		else
-			virtuetwo = new /datum/virtue/none()
+	var/virtuetwo_type = string_to_typepath(preset["virtuetwo"])
+	if(virtuetwo_type && ispath(virtuetwo_type, /datum/virtue))
+		virtuetwo = new virtuetwo_type()
 	else
 		virtuetwo = new /datum/virtue/none()
 	
-	var/vice1_type = preset["vice1"]
-	if(vice1_type)
-		if(ispath(vice1_type, /datum/charflaw))
-			vice1 = new vice1_type()
-		else if(istype(vice1_type, /datum/charflaw))
-			var/datum/charflaw/old_datum = vice1_type
-			if(old_datum.type)
-				vice1 = new old_datum.type
-			else
-				vice1 = null
-		else
-			vice1 = null
+	var/vice1_type = string_to_typepath(preset["vice1"])
+	if(vice1_type && ispath(vice1_type, /datum/charflaw))
+		vice1 = new vice1_type()
 	else
 		vice1 = null
 	
-	var/vice2_type = preset["vice2"]
-	if(vice2_type)
-		if(ispath(vice2_type, /datum/charflaw))
-			vice2 = new vice2_type()
-		else if(istype(vice2_type, /datum/charflaw))
-			var/datum/charflaw/old_datum = vice2_type
-			if(old_datum.type)
-				vice2 = new old_datum.type
-			else
-				vice2 = null
-		else
-			vice2 = null
+	var/vice2_type = string_to_typepath(preset["vice2"])
+	if(vice2_type && ispath(vice2_type, /datum/charflaw))
+		vice2 = new vice2_type()
 	else
 		vice2 = null
 	
-	var/vice3_type = preset["vice3"]
-	if(vice3_type)
-		if(ispath(vice3_type, /datum/charflaw))
-			vice3 = new vice3_type()
-		else if(istype(vice3_type, /datum/charflaw))
-			var/datum/charflaw/old_datum = vice3_type
-			if(old_datum.type)
-				vice3 = new old_datum.type
-			else
-				vice3 = null
-		else
-			vice3 = null
+	var/vice3_type = string_to_typepath(preset["vice3"])
+	if(vice3_type && ispath(vice3_type, /datum/charflaw))
+		vice3 = new vice3_type()
 	else
 		vice3 = null
 	
-	var/vice4_type = preset["vice4"]
-	if(vice4_type)
-		if(ispath(vice4_type, /datum/charflaw))
-			vice4 = new vice4_type()
-		else if(istype(vice4_type, /datum/charflaw))
-			var/datum/charflaw/old_datum = vice4_type
-			if(old_datum.type)
-				vice4 = new old_datum.type
-			else
-				vice4 = null
-		else
-			vice4 = null
+	var/vice4_type = string_to_typepath(preset["vice4"])
+	if(vice4_type && ispath(vice4_type, /datum/charflaw))
+		vice4 = new vice4_type()
 	else
 		vice4 = null
 	
-	var/vice5_type = preset["vice5"]
-	if(vice5_type)
-		if(ispath(vice5_type, /datum/charflaw))
-			vice5 = new vice5_type()
-		else if(istype(vice5_type, /datum/charflaw))
-			var/datum/charflaw/old_datum = vice5_type
-			if(old_datum.type)
-				vice5 = new old_datum.type
-			else
-				vice5 = null
-		else
-			vice5 = null
+	var/vice5_type = string_to_typepath(preset["vice5"])
+	if(vice5_type && ispath(vice5_type, /datum/charflaw))
+		vice5 = new vice5_type()
 	else
 		vice5 = null
 	
 	// Load loadout types and instantiate them if valid
-	var/loadout_type = preset["loadout"]
+	var/loadout_type = string_to_typepath(preset["loadout"])
 	if(loadout_type && ispath(loadout_type, /datum/loadout_item))
 		loadout = new loadout_type()
 	else
 		loadout = null
 	
-	var/loadout_type2 = preset["loadout2"]
+	var/loadout_type2 = string_to_typepath(preset["loadout2"])
 	if(loadout_type2 && ispath(loadout_type2, /datum/loadout_item))
 		loadout2 = new loadout_type2()
 	else
 		loadout2 = null
 	
-	var/loadout_type3 = preset["loadout3"]
+	var/loadout_type3 = string_to_typepath(preset["loadout3"])
 	if(loadout_type3 && ispath(loadout_type3, /datum/loadout_item))
 		loadout3 = new loadout_type3()
 	else
 		loadout3 = null
 	
-	var/loadout_type4 = preset["loadout4"]
+	var/loadout_type4 = string_to_typepath(preset["loadout4"])
 	if(loadout_type4 && ispath(loadout_type4, /datum/loadout_item))
 		loadout4 = new loadout_type4()
 	else
 		loadout4 = null
 	
-	var/loadout_type5 = preset["loadout5"]
+	var/loadout_type5 = string_to_typepath(preset["loadout5"])
 	if(loadout_type5 && ispath(loadout_type5, /datum/loadout_item))
 		loadout5 = new loadout_type5()
 	else
 		loadout5 = null
 	
-	var/loadout_type6 = preset["loadout6"]
+	var/loadout_type6 = string_to_typepath(preset["loadout6"])
 	if(loadout_type6 && ispath(loadout_type6, /datum/loadout_item))
 		loadout6 = new loadout_type6()
 	else
 		loadout6 = null
 	
-	var/loadout_type7 = preset["loadout7"]
+	var/loadout_type7 = string_to_typepath(preset["loadout7"])
 	if(loadout_type7 && ispath(loadout_type7, /datum/loadout_item))
 		loadout7 = new loadout_type7()
 	else
 		loadout7 = null
 	
-	var/loadout_type8 = preset["loadout8"]
+	var/loadout_type8 = string_to_typepath(preset["loadout8"])
 	if(loadout_type8 && ispath(loadout_type8, /datum/loadout_item))
 		loadout8 = new loadout_type8()
 	else
 		loadout8 = null
 	
-	var/loadout_type9 = preset["loadout9"]
+	var/loadout_type9 = string_to_typepath(preset["loadout9"])
 	if(loadout_type9 && ispath(loadout_type9, /datum/loadout_item))
 		loadout9 = new loadout_type9()
 	else
 		loadout9 = null
 	
-	var/loadout_type10 = preset["loadout10"]
+	var/loadout_type10 = string_to_typepath(preset["loadout10"])
 	if(loadout_type10 && ispath(loadout_type10, /datum/loadout_item))
 		loadout10 = new loadout_type10()
 	else
@@ -701,31 +629,24 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 	// Build summary string
 	var/summary = ""
 	
-	// Handle both type paths (new format) and datum instances (old format)
-	var/statpack_data = preset["statpack"]
-	if(statpack_data)
-		if(ispath(statpack_data, /datum/statpack))
-			var/datum/statpack/sp_temp = new statpack_data()
-			summary += "[sp_temp.name]"
-		else if(istype(statpack_data, /datum/statpack))
-			var/datum/statpack/sp = statpack_data
-			summary += "[sp.name]"
+	// Statpack - use string_to_typepath for JSON-decoded strings
+	var/statpack_path = string_to_typepath(preset["statpack"])
+	if(ispath(statpack_path, /datum/statpack))
+		var/datum/statpack/sp_temp = new statpack_path()
+		summary += "[sp_temp.name]"
 	
-	var/virtue_data = preset["virtue"]
-	if(virtue_data)
-		if(ispath(virtue_data, /datum/virtue))
-			var/datum/virtue/v_temp = new virtue_data()
-			if(v_temp.name != "None")
-				summary += " | [v_temp.name]"
-		else if(istype(virtue_data, /datum/virtue))
-			var/datum/virtue/v = virtue_data
-			if(v.name != "None")
-				summary += " | [v.name]"
+	// Virtue - use string_to_typepath for JSON-decoded strings
+	var/virtue_path = string_to_typepath(preset["virtue"])
+	if(ispath(virtue_path, /datum/virtue))
+		var/datum/virtue/v_temp = new virtue_path()
+		if(v_temp.name != "None")
+			summary += " | [v_temp.name]"
 	
 	// Count vices
 	var/vice_count = 0
 	for(var/i = 1 to 5)
-		if(preset["vice[i]"])
+		var/vice_path = string_to_typepath(preset["vice[i]"])
+		if(ispath(vice_path, /datum/charflaw))
 			vice_count++
 	if(vice_count > 0)
 		summary += " | [vice_count] vice[vice_count > 1 ? "s" : ""]"
@@ -734,7 +655,8 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 	var/loadout_count = 0
 	for(var/i = 1 to 10)
 		var/loadout_var = i == 1 ? "loadout" : "loadout[i]"
-		if(preset[loadout_var])
+		var/loadout_path = string_to_typepath(preset[loadout_var])
+		if(ispath(loadout_path, /datum/loadout_item))
 			loadout_count++
 	if(loadout_count > 0)
 		summary += " | [loadout_count] item[loadout_count > 1 ? "s" : ""]"
@@ -1543,18 +1465,21 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		switch(action)
 			if("save")
 				if(save_preset(slot))
+					save_character() // Persist preset to disk
 					to_chat(usr, span_notice("Saved current setup to Preset [slot]!"))
 					open_vices_menu(usr)
 				else
 					to_chat(usr, span_warning("Failed to save preset."))
 			if("load")
 				if(load_preset(slot))
+					save_character() // Persist loaded state to disk
 					to_chat(usr, span_notice("Loaded Preset [slot]!"))
 					open_vices_menu(usr)
 				else
 					to_chat(usr, span_warning("Preset [slot] is empty or invalid."))
 			if("clear")
 				if(clear_preset(slot))
+					save_character() // Persist cleared preset to disk
 					to_chat(usr, span_notice("Cleared Preset [slot]."))
 					open_vices_menu(usr)
 				else
