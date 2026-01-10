@@ -73,7 +73,7 @@
 		/obj/item/reagent_containers/food/snacks/fish/lobster = 100*rareMod,
 		/obj/item/reagent_containers/food/snacks/fish/bass = 100*commonMod,
 		/obj/item/reagent_containers/food/snacks/fish/clam = 150*rareMod,
-		/obj/item/roguegem/oyster = 40*rareMod + 50*treasureMod,
+		/obj/item/roguegem/oyster = 40*rareMod + 10*treasureMod,
 		/obj/item/reagent_containers/food/snacks/fish/clownfish = 50*rareMod + 200*ceruleanMod,
 		/obj/item/reagent_containers/food/snacks/fish/creepy_eel = 2*rareMod + 10*ceruleanMod,
 		/obj/item/reagent_containers/food/snacks/fish/creepy_squid = 7*rareMod + 10*ceruleanMod,
