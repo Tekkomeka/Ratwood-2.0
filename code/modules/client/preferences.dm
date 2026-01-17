@@ -112,6 +112,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/sexable = FALSE
 	var/compliance_notifs = TRUE
 	var/xenophobe_pref = 1
+	var/restricted_species_pref = null
 
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
@@ -531,9 +532,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					dat += "<b>Preferred Gender:</b> <a href='?_src_=prefs;preference=gender_choice'>[gender_choice ? gender_choice : "Any Gender"]</a><BR>"
 					var/species_text
 					if(xenophobe_pref == 1)
-						species_text = "<font color='#FFA500'>Race only</font>"
-					else if(xenophobe_pref == 2)
-						species_text = "<font color='#aa0202'>Subrace Only</font>"
+						species_text = "<font color='#FFA500'>Same Race</font>"
+					else if(xenophobe_pref == 2 && restricted_species_pref)
+						species_text = "<font color='#aa0202'>[restricted_species_pref] Only</font>"
 					else
 						species_text = "<font color='#1cb308'>Unrestricted</font>"
 					dat += "<b>Restrict Species:</b> <a href='?_src_=prefs;preference=species_choice'>[species_text]</a><BR>"
@@ -2546,18 +2547,27 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						if(new_gender_choice)
 							gender_choice = new_gender_choice
 				if("species_choice")
-					xenophobe_pref += 1
-					if(xenophobe_pref > 2)
-						if(family == FAMILY_FULL)
-							xenophobe_pref = 1
-						else
-							xenophobe_pref = 0
-					if(xenophobe_pref == 1)
-						to_chat(user, "Spouse species will be restricted to your race.")
-					else if(xenophobe_pref == 2)
-						to_chat(user, "Spouse species will be restricted to your subrace.")
-					else
+					var/list/restriction_options = list("Unrestricted", "Same Race", "Select Specific Race")
+					if(family == FAMILY_FULL)
+						restriction_options -= "Unrestricted"
+					var/choice = tgui_input_list(user, "SELECT SPOUSE SPECIES RESTRICTION", "SPECIES RESTRICTION", restriction_options)
+					if(choice == "Unrestricted")
+						xenophobe_pref = 0
+						restricted_species_pref = null
 						to_chat(user, "Spouse species is unrestricted.")
+					else if(choice == "Same Race")
+						xenophobe_pref = 1
+						restricted_species_pref = null
+						to_chat(user, "Spouse species will be restricted to your race.")
+					else if(choice == "Select Specific Race")
+						var/list/available_races = list()
+						for(var/race_name in GLOB.roundstart_races)
+							available_races += race_name
+						var/selected_race = tgui_input_list(user, "SELECT ALLOWED SPOUSE RACE", "SPECIES SELECTION", available_races)
+						if(selected_race)
+							xenophobe_pref = 2
+							restricted_species_pref = selected_race
+							to_chat(user, "Spouse species will be restricted to [selected_race].")
 				if("hotkeys")
 					hotkeys = !hotkeys
 					if(hotkeys)
@@ -2979,6 +2989,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	character.gender_choice_pref = gender_choice
 	character.setspouse = setspouse
 	character.xenophobe = xenophobe_pref
+	character.restricted_species = restricted_species_pref
 
 	character.jumpsuit_style = jumpsuit_style
 

@@ -703,6 +703,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["gender_choice"] 		>> gender_choice
 	S["setspouse"] 			>> setspouse
 	S["xenophobe_pref"]		>> xenophobe_pref
+	S["restricted_species_pref"]	>> restricted_species_pref
 	S["extra_language"]		>> extra_language
 	S["selected_title"]		>> selected_title
 	S["extra_language_1"]	>> extra_language_1
@@ -902,6 +903,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	gender_choice 	= gender_choice
 	setspouse 		= setspouse
 	xenophobe_pref 	= xenophobe_pref
+	restricted_species_pref = restricted_species_pref
 	extra_language  = extra_language
 	selected_title  = selected_title
 	voice_color		= voice_color
@@ -995,6 +997,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["gender_choice"], gender_choice)
 	WRITE_FILE(S["setspouse"], setspouse)
 	WRITE_FILE(S["xenophobe_pref"], xenophobe_pref)
+	WRITE_FILE(S["restricted_species_pref"], restricted_species_pref)
 	// Save new vice system
 	WRITE_FILE(S["vice1"], preferences_typepath_or_null(vice1))
 	WRITE_FILE(S["vice2"], preferences_typepath_or_null(vice2))

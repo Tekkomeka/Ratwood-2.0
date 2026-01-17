@@ -330,7 +330,6 @@ SUBSYSTEM_DEF(familytree)
 		return
 
 	var/our_race = H.dna.species.name
-	var/our_subrace = H.dna.species.name
 	var/adopted = FALSE
 	var/datum/heritage/chosen_house
 	var/list/low_priority_houses = list()
@@ -342,7 +341,7 @@ SUBSYSTEM_DEF(familytree)
 				if(M.person && M.person.real_name == H.setspouse)
 					if(M.person.xenophobe == 1 && M.person.dna.species.name != our_race)
 						break
-					if(M.person.xenophobe == 2 && M.person.dna.species.name != our_subrace)
+					if(M.person.xenophobe == 2 && M.person.restricted_species && M.person.dna.species.name != M.person.restricted_species)
 						break
 					chosen_house = house
 
@@ -471,7 +470,9 @@ SUBSYSTEM_DEF(familytree)
 						var/ok_gender_M = member.person.pronouns_match(member.person, H)
 						if((member.person.xenophobe == 1 || H.xenophobe == 1) && member.person.dna.species.name != our_race)
 							continue
-						if((member.person.xenophobe == 2 || H.xenophobe == 2) && member.person.dna.species.name != our_subrace)
+						if(member.person.xenophobe == 2 && member.person.restricted_species && our_race != member.person.restricted_species)
+							continue
+						if(H.xenophobe == 2 && H.restricted_species && member.person.dna.species.name != H.restricted_species)
 							continue
 						if(member.person.familytree_pref == FAMILY_PARTIAL)
 							continue
@@ -540,7 +541,7 @@ SUBSYSTEM_DEF(familytree)
 			continue
 		if((potential_spouse.xenophobe == 1 || H.xenophobe == 1) && potential_spouse.dna.species.name != H.dna.species.name)
 			continue
-		if((potential_spouse.xenophobe == 2 || H.xenophobe == 2) && potential_spouse.dna.species.type != H.dna.species.type)
+		if(potential_spouse.xenophobe == 2 && potential_spouse.restricted_species && H.dna.species.name != potential_spouse.restricted_species)
 			continue
 		// Check setspouse compatibility
 		var/priority = 0

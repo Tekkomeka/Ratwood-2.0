@@ -113,6 +113,7 @@
 	var/datum/heritage/family_datum
 	var/list/temp_ui_list = list()
 	var/xenophobe = FALSE
+	var/restricted_species = null
 
 	var/marriedto
 
