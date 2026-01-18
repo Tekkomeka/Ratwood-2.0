@@ -663,7 +663,7 @@
 
 //Servant Clothing:
 //................ Maid Dress   ............... //
-/obj/item/clothing/shirt/dress/maid
+/obj/item/clothing/suit/roguetown/shirt/dress/maid
 	name = "maid dress"
 	desc = "A dress befitting the housekeeper of a lord's staff. While not as intricate as a royal's, it is indicative of the house's status."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
