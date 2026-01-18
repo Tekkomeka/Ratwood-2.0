@@ -67,7 +67,7 @@
 		H.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
-/datum/outfit/job/seneschal/seneschal/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/seneschal/seneschal/pre_equip(mob/living/carbon/human/H)
 	..()
 	armor = /obj/item/clothing/armor/gambeson/tailcoat
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/formal

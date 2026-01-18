@@ -864,7 +864,7 @@
 
 /obj/item/clothing/cloak/apron/maid/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
 
 /obj/item/clothing/cloak/apron
 	name = "apron"

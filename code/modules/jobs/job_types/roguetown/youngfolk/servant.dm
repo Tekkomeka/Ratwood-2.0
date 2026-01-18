@@ -30,7 +30,7 @@
 	)
 
 /datum/advclass/servant
-	traits_applied = list(TRAIT_CICERONE, TRAIT_ROYALSERVANT)
+	traits_applied = list(TRAIT_CICERONE, TRAIT_KEENEARS, TRAIT_SLEUTH, TRAIT_ROYALSERVANT)
 
 /datum/advclass/servant
 	traits_applied = list(TRAIT_CICERONE)
@@ -68,7 +68,7 @@
 	belt = /obj/item/storage/belt/leather/suspenders/butler
 	beltr = /obj/item/storage/keyring/servant
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-	armor = /obj/item/clothing/suit/roguetown/armor/workervest
+	armor = /obj/item/clothing/suit/roguetown/shirt/dress/maid/servant
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless
 	if(H.age == AGE_MIDDLEAGED)
 		H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
@@ -106,7 +106,7 @@
 /datum/outfit/job/roguetown/servant/maid/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/maidband
-	armor = /obj/item/clothing/suit/roguetown/shirt/dress/maid/servant
+	armor = /obj/item/clothing/suit/roguetown/shirt/dress/maid
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	cloak = /obj/item/clothing/cloak/apron/maid
 	backl = /obj/item/storage/backpack/rogue/satchel/black
