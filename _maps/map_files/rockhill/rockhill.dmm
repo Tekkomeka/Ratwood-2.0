@@ -749,7 +749,7 @@
 "anq" = (
 /obj/structure/closet/crate/roguecloset/inn,
 /obj/item/storage/roguebag,
-/obj/item/rogueweapon/hoe/stone,
+/obj/item/rogueweapon/hoe/aalloy,
 /obj/item/broom,
 /turf/open/floor/rogue/ruinedwood/herringbone,
 /area/rogue/indoors)
