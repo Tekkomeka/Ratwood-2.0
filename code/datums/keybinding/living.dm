@@ -287,6 +287,8 @@
 
 /datum/keybinding/living/pixel_shift_layerup/down(client/user)
 	var/mob/living/M = user.mob
+	if(!isliving(M))
+		return
 	if(M.mobility_flags & MOBILITY_STAND)
 		return
 	if(M.pixelshift_layer <= 0.04)
@@ -306,6 +308,8 @@
 
 /datum/keybinding/living/pixel_shift_layerdown/down(client/user)
 	var/mob/living/M = user.mob
+	if(!isliving(M))
+		return
 	if(M.mobility_flags & MOBILITY_STAND)
 		return
 	if(M.pixelshift_layer >= -0.04)
