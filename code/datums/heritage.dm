@@ -518,6 +518,11 @@
 	return null
 
 /datum/heritage/New(mob/living/carbon/human/founder_person, new_name, majority_species)
+	if(majority_species)
+		dominant_species = majority_species
+		var/datum/species/S = new majority_species()
+		dominant_race = S.name
+
 	if(founder_person)
 		founder = CreateFamilyMember(founder_person)
 		founder.generation = 0
@@ -527,9 +532,8 @@
 		else
 			housename = new_name
 
-		dominant_species = majority_species
 		dominant_race = founder_person?.dna?.species?.name
-		if(!majority_species)
+		if(!dominant_species)
 			dominant_species = founder_person?.dna?.species?.type
 
 /datum/heritage/proc/CreateFamilyMember(mob/living/carbon/human/person)

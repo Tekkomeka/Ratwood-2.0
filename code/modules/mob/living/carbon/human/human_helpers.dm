@@ -204,14 +204,7 @@
 
 	else
 		// Neither has family - create new one
-		var/new_family_name = null
-		// Use the male's surname traditionally, or first person's if no male
-		if(gender == MALE)
-			new_family_name = family_datum?.SurnameFormatting(src)
-		else if(spouse.gender == MALE)
-			new_family_name = family_datum?.SurnameFormatting(spouse)
-
-		primary_family = new /datum/heritage(src, new_family_name)
+		primary_family = new /datum/heritage(src)
 		primary_member = primary_family.founder
 		secondary_member = primary_family.CreateFamilyMember(spouse)
 

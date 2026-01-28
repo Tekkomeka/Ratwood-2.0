@@ -230,7 +230,7 @@ SUBSYSTEM_DEF(familytree)
 	// Make the hand a sibling of the monarch (so uncle/aunt to any princes/princesses)
 	if(monarch.parents.len)
 		var/datum/family_member/monarch_parent = monarch.parents[1]
-		var/datum/family_member/monarch_parent_second = monarch.parents[2]
+		var/datum/family_member/monarch_parent_second = monarch.parents.len >= 2 ? monarch.parents[2] : null
 		if(monarch_parent)
 			hand_member.AddParent(monarch_parent)
 		if(monarch_parent_second)
@@ -341,7 +341,9 @@ SUBSYSTEM_DEF(familytree)
 				if(M.person && M.person.real_name == H.setspouse)
 					if(M.person.xenophobe == 1 && M.person.dna.species.name != our_race)
 						break
-					if(M.person.xenophobe == 2 && M.person.restricted_species && M.person.dna.species.name != M.person.restricted_species)
+					if(M.person.xenophobe == 2 && M.person.restricted_species && our_race != M.person.restricted_species)
+						break
+					if(H.xenophobe == 2 && H.restricted_species && M.person.dna.species.name != H.restricted_species)
 						break
 					chosen_house = house
 
@@ -446,7 +448,6 @@ SUBSYSTEM_DEF(familytree)
 	if(!H)
 		return
 	var/our_race = H.dna.species.name
-	var/our_subrace = H.dna.species.name
 	var/list/eligible_houses = list()
 
 	// Find houses that need a spouse
@@ -521,8 +522,8 @@ SUBSYSTEM_DEF(familytree)
 				return
 
 	// Create entirely new house if no match found
-	if(our_subrace != "Aasimar" && our_subrace != "Doll" && our_subrace != "Golem")
-		var/datum/heritage/new_house = new /datum/heritage(H, null, our_subrace)
+	if(our_race != "Aasimar" && our_race != "Doll" && our_race != "Golem")
+		var/datum/heritage/new_house = new /datum/heritage(H, null, H.dna.species.type)
 		families += new_house
 
 /datum/controller/subsystem/familytree/proc/AssignNewlyWed(mob/living/carbon/human/H)
@@ -542,6 +543,8 @@ SUBSYSTEM_DEF(familytree)
 		if((potential_spouse.xenophobe == 1 || H.xenophobe == 1) && potential_spouse.dna.species.name != H.dna.species.name)
 			continue
 		if(potential_spouse.xenophobe == 2 && potential_spouse.restricted_species && H.dna.species.name != potential_spouse.restricted_species)
+			continue
+		if(H.xenophobe == 2 && H.restricted_species && potential_spouse.dna.species.name != H.restricted_species)
 			continue
 		// Check setspouse compatibility
 		var/priority = 0
