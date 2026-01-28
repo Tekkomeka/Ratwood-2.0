@@ -153,7 +153,7 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-	shoes = /obj/item/clothing/shoes/roguetown/boots
+	shoes = /obj/item/clothing/shoes/roguetown/boots/nobleboot
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
 	backl = /obj/item/storage/backpack/rogue/satchel
